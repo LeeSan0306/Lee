@@ -318,6 +318,7 @@
   .contact{
     position:relative;overflow:hidden;text-align:left;
     padding:clamp(72px,9vw,128px) 0 0;border-top:1px solid var(--line);
+    content-visibility:auto;contain-intrinsic-size:auto 900px;
   }
   .contact::before{
     content:"";position:absolute;inset:0;pointer-events:none;
@@ -448,7 +449,7 @@
       <div class="about-grid">
         <div class="about-left">
           <figure class="portrait">
-            <img src="assets/portrait.jpg" alt="李山 个人形象照片" width="720" height="960" loading="lazy">
+            <img src="assets/portrait.jpg" alt="李山 个人形象照片" width="720" height="960" loading="lazy" decoding="async">
             <span class="badge">李山 <em>LiShan</em></span>
           </figure>
           <p class="about-lead">我是李山，一名<span class="hl">全链路体验设计师</span>。十年间从C端金融产品做到B端企业服务与AI智能产品，始终相信好设计 = 可用的温度 × 确定的价值。</p>
@@ -515,7 +516,7 @@
           </div>
           <button class="p-more" data-open="ai">查看完整案例 ↗</button>
         </div>
-        <figure class="p-media" data-open="ai" tabindex="0" role="button" aria-label="查看 AI组织智汇站 完整案例"><img src="assets/cover-ai.jpg" alt="AI组织智汇站 产品设计" width="1400" height="787" loading="lazy"><span class="zoom">点击查看详情</span></figure>
+        <figure class="p-media" data-open="ai" tabindex="0" role="button" aria-label="查看 AI组织智汇站 完整案例"><img src="assets/cover-ai.jpg" alt="AI组织智汇站 产品设计" width="1400" height="787" loading="lazy" decoding="async"><span class="zoom">点击查看详情</span></figure>
       </article>
 
       <!-- project 2 -->
@@ -534,7 +535,7 @@
           </div>
           <button class="p-more" data-open="live">查看完整案例 ↗</button>
         </div>
-        <figure class="p-media" data-open="live" tabindex="0" role="button" aria-label="查看 同花顺财经直播 完整案例"><img src="assets/cover-live.jpg" alt="同花顺财经直播 体验设计迭代" width="1400" height="787" loading="lazy"><span class="zoom">点击查看详情</span></figure>
+        <figure class="p-media" data-open="live" tabindex="0" role="button" aria-label="查看 同花顺财经直播 完整案例"><img src="assets/cover-live.jpg" alt="同花顺财经直播 体验设计迭代" width="1400" height="787" loading="lazy" decoding="async"><span class="zoom">点击查看详情</span></figure>
       </article>
 
       <!-- project 3 -->
@@ -553,7 +554,7 @@
           </div>
           <button class="p-more" data-open="ds">查看完整案例 ↗</button>
         </div>
-        <figure class="p-media" data-open="ds" tabindex="0" role="button" aria-label="查看 B端设计系统 完整案例"><img src="assets/cover-ds.jpg" alt="B端设计系统" width="1400" height="787" loading="lazy"><span class="zoom">点击查看详情</span></figure>
+        <figure class="p-media" data-open="ds" tabindex="0" role="button" aria-label="查看 B端设计系统 完整案例"><img src="assets/cover-ds.jpg" alt="B端设计系统" width="1400" height="787" loading="lazy" decoding="async"><span class="zoom">点击查看详情</span></figure>
       </article>
 
       <!-- project 4 -->
@@ -572,7 +573,7 @@
           </div>
           <button class="p-more" data-open="dash">查看完整案例 ↗</button>
         </div>
-        <figure class="p-media" data-open="dash" tabindex="0" role="button" aria-label="查看 数据可视化大屏 完整案例"><img src="assets/cover-dash.jpg" alt="数据可视化大屏设计" width="1400" height="787" loading="lazy"><span class="zoom">点击查看详情</span></figure>
+        <figure class="p-media" data-open="dash" tabindex="0" role="button" aria-label="查看 数据可视化大屏 完整案例"><img src="assets/cover-dash.jpg" alt="数据可视化大屏设计" width="1400" height="787" loading="lazy" decoding="async"><span class="zoom">点击查看详情</span></figure>
       </article>
     </div>
   </section>
@@ -668,7 +669,7 @@
     </div>
     <button class="lb-close" id="lbClose" aria-label="关闭">✕</button>
   </div>
-  <div class="lb-view" id="lbView"><img src="assets/case-ai.jpg" alt="AI组织智汇站 · 组织级决策智能系统设计" data-i="0" width="1400" height="10551" loading="lazy"></div>
+  <div class="lb-view" id="lbView"><img src="assets/case-ai.jpg" alt="AI组织智汇站 · 组织级决策智能系统设计" data-i="0" width="1400" height="10551" loading="lazy" decoding="async"></div>
   <button class="lb-nav lb-prev" id="lbPrev" aria-label="上一张">‹</button>
   <button class="lb-nav lb-next" id="lbNext" aria-label="下一张">›</button>
   <div class="lb-foot">
@@ -777,7 +778,7 @@
     lbMeta.textContent = p.meta || '';
     lbImgs = p.imgs;
     lastFocus = document.activeElement;
-    lbView.innerHTML = p.imgs.map((s,i)=>`<img src="${s}" alt="${p.title} 第${i+1}张" data-i="${i}" ${dimAttr(s)} loading="lazy">`).join('');
+    lbView.innerHTML = p.imgs.map((s,i)=>`<img src="${s}" alt="${p.title} 第${i+1}张" data-i="${i}" ${dimAttr(s)} loading="lazy" decoding="async">`).join('');
     buildThumbs();
     updateChrome();
     lb.classList.add('on'); document.body.style.overflow='hidden';
