@@ -48,7 +48,6 @@
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
     html{scroll-behavior:auto;}
-    .marquee .track{animation:none!important;}
     .hero::before,.hero-main{transform:none!important;}
   }
   body{
@@ -240,17 +239,6 @@
   .btn.accent:hover{background:var(--accent);border-color:var(--accent);box-shadow:0 8px 28px rgba(228,87,61,.38);}
   .btn.ghost{background:transparent;}
   .btn.ghost:hover{border-color:var(--accent);color:var(--accent);}
-
-  /* ---------- marquee ---------- */
-  .marquee{
-    background:var(--surface);color:var(--fg-2);overflow:hidden;white-space:nowrap;
-    padding:16px 0;border-top:1px solid var(--line);
-  }
-  .marquee .track{display:inline-block;animation:scroll 30s linear infinite;}
-  .marquee:hover .track{animation-play-state:paused;}
-  .marquee span{display:inline-block;font-family:var(--font-mono);font-weight:500;font-size:clamp(13px,1.8vw,16px);letter-spacing:.14em;margin-right:40px;text-transform:uppercase;}
-  .marquee span::after{content:"·";margin-left:40px;color:var(--accent);}
-  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
   /* ---------- about ---------- */
   .about-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(36px,5vw,72px);align-items:start;}
@@ -546,14 +534,6 @@
       <a href="#about">下滑探索<span class="ln"></span></a>
     </div>
   </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee" aria-hidden="true">
-    <div class="track">
-      <span>全链路体验</span><span>信息架构</span><span>0→1 设计体系</span><span>B端/C端融合</span><span>用户洞察</span><span>数据驱动设计</span><span>团队管理</span><span>跨职能协作</span><span>AI产品体验</span><span>自然语言交互</span><span>业务增长设计</span><span>设计→研发映射</span>
-      <span>全链路体验</span><span>信息架构</span><span>0→1 设计体系</span><span>B端/C端融合</span><span>用户洞察</span><span>数据驱动设计</span><span>团队管理</span><span>跨职能协作</span><span>AI产品体验</span><span>自然语言交互</span><span>业务增长设计</span><span>设计→研发映射</span>
-    </div>
-  </div>
 
   <!-- ABOUT -->
   <section class="sec" id="about">
