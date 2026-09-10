@@ -10,6 +10,8 @@
 <meta property="og:description" content="李山，10年+全链路体验设计师，覆盖千万级C端产品与复杂B端系统，数据驱动体验升级，设计系统落地专家。">
 <meta property="og:image" content="assets/portrait.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0B0D'/%3E%3Ctext x='32' y='42' font-family='Arial, sans-serif' font-size='30' font-weight='900' fill='%23E4573D' text-anchor='middle'%3EL.%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin>
 <style>
   /* local fonts (self-hosted, no external CDN dependency) */
   @font-face{font-family:'Archivo';font-style:normal;font-weight:500 900;font-display:swap;src:url('assets/fonts/archivo-variable.woff2') format('woff2-variations');}
@@ -42,12 +44,10 @@
   html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px);color-scheme:dark;}
   :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
   section[id]{scroll-margin-top:calc(var(--nav-h) + 12px);}
-  .skip-link{position:fixed;top:12px;left:12px;z-index:10001;transform:translateY(-200%);background:var(--accent);color:#12100F;font-family:var(--font-mono);font-size:13px;font-weight:600;padding:12px 18px;border-radius:8px;transition:transform .2s var(--ease-out);}
-  .skip-link:focus{transform:translateY(0);}
+  .skip-link{display:none;}
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
     html{scroll-behavior:auto;}
-    .cursor{display:none!important;}
     .marquee .track{animation:none!important;}
     .hero::before,.hero-main{transform:none!important;}
   }
@@ -91,21 +91,21 @@
     margin-top:14px;font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;
     color:var(--fg-3);font-variant-numeric:tabular-nums;
   }
+  .cursor-glow{
+    position:fixed;top:0;left:0;width:350px;height:350px;
+    border-radius:50%;pointer-events:none;z-index:50;
+    background:radial-gradient(circle, rgba(228,87,61,.25) 0%, rgba(228,87,61,.10) 35%, transparent 70%);
+    mix-blend-mode:screen;opacity:0;
+    transform:translate(-50%,-50%);transition:opacity .6s ease;
+    will-change:transform;
+  }
+  .cursor-glow.active{opacity:1;}
+  @media (hover:none),(pointer:coarse){.cursor-glow{display:none;}}
   ::selection{background:var(--accent);color:#fff;}
   a{color:inherit;text-decoration:none;}
   img{display:block;width:100%;height:auto;}
   a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
   .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--pad);}
-
-  /* ---------- custom cursor ---------- */
-  .cursor{
-    position:fixed;top:0;left:0;width:20px;height:20px;border-radius:50%;
-    background:var(--accent);pointer-events:none;z-index:10000;
-    transform:translate(calc(var(--cx, -100px) - 10px), calc(var(--cy, -100px) - 10px)) scale(1);
-    transition:transform .18s var(--ease-out),opacity .25s;opacity:.9;
-  }
-  .cursor.grow{transform:translate(calc(var(--cx, -100px) - 10px), calc(var(--cy, -100px) - 10px)) scale(2.8);opacity:.55;}
-  @media (hover:none),(pointer:coarse){.cursor{display:none;}}
 
   /* ---------- nav ---------- */
   .nav{
@@ -183,8 +183,8 @@
   }
   .hero::before{
     content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-    background:radial-gradient(38% 46% at 82% 14%, rgba(228,87,61,.10), transparent 62%),
-               radial-gradient(30% 40% at 6% 90%, rgba(228,87,61,.05), transparent 60%);
+    background:radial-gradient(38% 46% at 82% 14%, rgba(228,87,61,.06), transparent 62%),
+               radial-gradient(30% 40% at 6% 90%, rgba(228,87,61,.03), transparent 60%);
     transform:translateY(calc(var(--scroll-y, 0px) * 0.3));
   }
   .hero-main{transform:translateY(calc(var(--scroll-y, 0px) * 0.12));will-change:transform;}
@@ -221,7 +221,7 @@
     margin-top:40px;padding-top:24px;border-top:1px solid var(--line);
     font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-3);
   }
-  .hero-foot a{display:inline-flex;align-items:center;gap:12px;color:var(--fg-2);transition:color .2s;}
+  .hero-foot a{display:inline-flex;align-items:center;gap:12px;color:var(--fg-2);transition:color .2s;padding:8px 0;min-height:40px;}
   .hero-foot a:hover{color:var(--accent);}
   .hero-foot .ln{position:relative;display:inline-block;width:18px;height:26px;border:1px solid var(--line-strong);border-radius:10px;}
   .hero-foot .ln::after{content:"";position:absolute;left:50%;top:5px;width:3px;height:6px;margin-left:-1.5px;border-radius:2px;background:var(--accent);animation:wheel 1.8s ease-in-out infinite;}
@@ -253,50 +253,98 @@
   @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
   /* ---------- about ---------- */
-  .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,6vw,88px);align-items:start;}
-  .portrait{position:relative;max-width:320px;margin:0 0 44px;}
-  .portrait img{
-    border-radius:var(--radius-sm);border:1px solid var(--line-strong);
-    aspect-ratio:3/4;object-fit:cover;object-position:top center;
-    filter:grayscale(.1) contrast(1.03) brightness(.97);
+  .about-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(36px,5vw,72px);align-items:start;}
+  .about-main{min-width:0;}
+  .about-title{
+    font-family:var(--font-display);font-weight:800;
+    font-size:clamp(36px,5vw,64px);line-height:1.15;letter-spacing:-.01em;
+    margin-bottom:24px;
   }
-  .portrait .badge{
-    position:absolute;left:-14px;bottom:22px;background:var(--surface);color:var(--fg);
-    border:1px solid var(--line-strong);font-family:var(--font-mono);font-size:12px;font-weight:500;
-    letter-spacing:.08em;padding:9px 13px;border-radius:7px;
+  .about-title .fill-accent{color:var(--accent);}
+  .about-desc{
+    font-size:clamp(14px,1.4vw,16px);line-height:1.85;color:var(--fg-2);
+    max-width:62ch;margin-bottom:48px;
   }
-  .portrait .badge em{font-style:normal;color:var(--accent);}
-  .about-lead{font-size:clamp(21px,2.5vw,30px);font-weight:600;line-height:1.55;letter-spacing:.01em;}
-  .about-lead .hl{color:var(--accent);}
-  .about-bio{color:var(--fg-2);margin-top:18px;max-width:56ch;font-size:15px;}
-  .tag-blk{margin-top:34px;}
-  .about-side > .tag-blk:first-child{margin-top:0;}
-  .tag-blk h4{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-3);margin-bottom:14px;font-weight:500;}
-  .tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .about-desc b{color:var(--fg);font-weight:600;}
+  .about-subtitle{
+    font-family:var(--font-display);font-weight:700;font-size:clamp(20px,2.4vw,26px);
+    display:flex;align-items:center;gap:10px;margin-bottom:20px;
+  }
+  .about-subtitle .dot{
+    display:inline-block;width:8px;height:8px;background:var(--accent);
+    border-radius:2px;transform:rotate(45deg);
+  }
+
+  .xp-list{margin-bottom:48px;}
+  .xp-row{
+    display:grid;grid-template-columns:20px 1fr auto auto;gap:16px;align-items:center;
+    padding:14px 0;border-bottom:1px solid var(--line);
+    transition:background .2s,padding-left .2s;
+  }
+  .xp-row:hover{background:rgba(228,87,61,.04);padding-left:8px;}
+  .xp-dot{
+    width:8px;height:8px;border-radius:50%;background:var(--line-strong);
+    transition:background .2s,box-shadow .2s;
+  }
+  .xp-row:hover .xp-dot{background:var(--accent);box-shadow:0 0 8px rgba(228,87,61,.5);}
+  .xp-company{font-weight:600;font-size:15px;color:var(--fg);}
+  .xp-role{font-family:var(--font-mono);font-size:13px;color:var(--fg-2);text-align:right;}
+  .xp-time{font-family:var(--font-mono);font-size:13px;color:var(--fg-3);min-width:80px;text-align:right;}
+
+  .tags{display:flex;flex-wrap:wrap;gap:10px;}
   .tag{
-    font-family:var(--font-mono);font-size:12px;font-weight:500;padding:9px 14px;
+    font-family:var(--font-mono);font-size:13px;font-weight:500;padding:11px 20px;
     border:1px solid var(--line-strong);border-radius:99px;color:var(--fg-2);
-    transition:border-color .18s,color .18s;
+    transition:border-color .2s,color .2s,background .2s;
   }
-  .tag:hover{border-color:var(--accent);color:var(--accent);}
-  .tag.hl{border-color:var(--accent);color:var(--accent);}
+  .tag:hover{border-color:var(--accent);color:var(--accent);background:rgba(228,87,61,.06);}
+  .tag.hl{border-color:var(--accent);color:var(--accent);background:rgba(228,87,61,.08);}
 
-  .xp{margin-top:36px;}
-  .xp-item{display:grid;grid-template-columns:132px 1fr;gap:22px;padding:22px 0;border-top:1px solid var(--line);}
-  .xp-item .t{font-family:var(--font-mono);font-size:12px;color:var(--fg-3);padding-top:3px;}
-  .xp-item .c b{display:block;font-family:var(--font-display);font-weight:700;font-size:17px;}
-  .xp-item .c .role{font-family:var(--font-mono);font-weight:500;font-size:12px;color:var(--accent);letter-spacing:.04em;}
-  .xp-item .c p{font-size:13.5px;color:var(--fg-2);margin-top:6px;max-width:58ch;}
-  .edu{margin-top:34px;font-size:14px;color:var(--fg-2);}
-  .edu b{color:var(--fg);font-weight:600;}
+  .about-side{position:sticky;top:100px;}
+  .portrait-card{
+    position:relative;border-radius:var(--radius);overflow:hidden;
+    border:1px solid var(--line-strong);background:var(--surface);
+  }
+  .portrait-card img{
+    width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top center;
+    filter:grayscale(.05) contrast(1.02) brightness(.98);
+  }
+  .portrait-info{
+    position:absolute;bottom:0;left:0;right:0;z-index:2;
+    display:flex;align-items:center;gap:14px;padding:20px 22px;
+    background:linear-gradient(transparent,rgba(0,0,0,.85));
+    font-family:var(--font-mono);font-size:16px;
+  }
+  .pi-name{font-weight:700;font-size:21px;color:#fff;}
+  .pi-divider{width:1px;height:18px;background:rgba(255,255,255,.3);}
+  .pi-role{color:rgba(255,255,255,.8);}
 
-  @media (max-width:860px){
-    .about-grid{grid-template-columns:1fr;}
-    .portrait{max-width:260px;}
+  .about-contact{
+    display:flex;flex-direction:column;gap:12px;margin-top:20px;
+  }
+  .contact-item{
+    display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);
+    font-size:13px;color:var(--fg-2);transition:color .2s;
+    padding:8px 0;min-height:40px;
+  }
+  .contact-item:hover{color:var(--accent);}
+  .contact-item svg{width:16px;height:16px;flex-shrink:0;}
+  .contact-item em{font-style:normal;color:var(--fg-3);font-size:11px;}
+
+  @media (max-width:960px){
+    .about-grid{display:block;position:relative;}
+    .about-side{position:absolute;top:0;left:0;z-index:2;}
+    .about-main{display:block;}
+    .about-title{padding-left:78px;min-height:64px;display:flex;align-items:center;}
+    .about-contact{display:none;}
+    .portrait-card{width:64px;height:64px;border-radius:50%;border:2px solid rgba(228,87,61,.3);box-shadow:0 0 20px rgba(228,87,61,.12);margin:0;}
+    .portrait-card img{border-radius:50%;aspect-ratio:1/1;object-position:center 25%;}
+    .portrait-info{display:none;}
   }
   @media (max-width:520px){
-    .xp-item{grid-template-columns:1fr;gap:10px;}
-    .xp-item .t{margin-bottom:-4px;}
+    .xp-row{grid-template-columns:16px 1fr;grid-template-rows:auto auto;gap:4px 12px;}
+    .xp-role{grid-column:2;text-align:left;font-size:12px;}
+    .xp-time{grid-column:2;text-align:left;font-size:11px;color:var(--fg-3);}
   }
 
   /* ---------- work ---------- */
@@ -329,7 +377,7 @@
   .p-media:hover .zoom{opacity:1;transform:translateY(0);}
   .p-more{
     display:inline-flex;align-items:center;gap:10px;margin-top:26px;font-family:var(--font-mono);font-weight:500;font-size:13px;
-    border:none;background:none;color:var(--fg);border-bottom:1px solid var(--line-strong);padding:10px 2px;cursor:pointer;
+    border:none;background:none;color:var(--fg);border-bottom:1px solid var(--line-strong);padding:12px 2px;min-height:44px;cursor:pointer;
     transition:color .18s,border-color .18s,gap .2s var(--ease-out);
   }
   .p-more:hover{color:var(--accent);border-color:var(--accent);gap:18px;}
@@ -359,7 +407,7 @@
   .step p{color:var(--fg-2);font-size:13.5px;}
   .step .en{font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--fg-3);}
   @media (max-width:860px){.steps{grid-template-columns:repeat(2,1fr);}.step:nth-child(2){border-right:0;}.step:nth-child(-n+2){border-bottom:1px solid var(--line);}}
-  @media (max-width:520px){.steps{grid-template-columns:1fr;}.step,.step:nth-child(2){border-right:0;border-bottom:1px solid var(--line);}.step:last-child{border-bottom:0;}}
+  @media (max-width:520px){.steps{grid-template-columns:repeat(2,1fr);}.step,.step:nth-child(2){border-right:0;border-bottom:1px solid var(--line);}.step:nth-child(3){border-bottom:0;}.step:last-child{border-bottom:0;}}
 
   /* ---------- contact ---------- */
   .contact{
@@ -442,7 +490,6 @@
 </head>
 <body>
 <a class="skip-link" href="#main">跳到主要内容</a>
-<div class="cursor" id="cursor" aria-hidden="true" style="--cx:551px;--cy:665px;"></div>
 
 <!-- Loading -->
 <div class="loader" id="loader" aria-hidden="true">
@@ -452,6 +499,9 @@
     <div class="loader-pct" id="loaderPct">0%</div>
   </div>
 </div>
+
+<!-- Cursor glow -->
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
 <nav class="nav" id="nav">
   <a class="logo" href="#home">李山 · 产品体验设计&nbsp;<em>.</em></a>
@@ -513,55 +563,128 @@
         <span class="sec-en">Profile &amp; experience</span>
       </div>
       <div class="about-grid">
-        <div class="about-left">
-          <figure class="portrait">
-            <img src="assets/portrait.jpg" alt="李山 个人形象照片" width="720" height="960" loading="lazy" decoding="async">
-            <span class="badge">李山 <em>LiShan</em></span>
-          </figure>
-          <p class="about-lead">我是李山，一名<span class="hl">全链路体验设计师</span>。十年间从C端金融产品做到B端企业服务与AI智能产品，始终相信好设计 = 可用的温度 × 确定的价值。</p>
-          <p class="about-bio">擅长从需求洞察到上线验收的完整闭环：主导同花顺财经直播核心迭代，让互动率翻倍；搭建微脉全业务线设计规范并映射为开发组件，提升研发效率40%；深度参与AI产品全链路设计，探索AI驱动体验创新。</p>
+        <div class="about-main">
+          <h3 class="about-title">你好，我是<span class="fill-accent">李山</span></h3>
+          <p class="about-desc">我是一名有 <b>10年+产品设计经验</b>，长期专注于互联网医疗、互联网金融、企业服务相关项目的设计与落地。主导过设计系统搭建与落地提效、同花顺直播升级、阿里云企业AI智能项目，我的设计方式通常从用户场景和产品目标出发，结合调研、信息架构、交互设计与视觉表达，构建设计方案的完整链路。我也持续关注 <b>AI赋能设计工作流程</b>，希望借助新工具提升研究效率、方案探索速度与设计验证质量。</p>
+
+          <h4 class="about-subtitle">工作经历<span class="dot"></span></h4>
+          <div class="xp-list">
+            <div class="xp-row"><span class="xp-dot"></span><span class="xp-company">软通动力信息技术(集团)股份有限公司</span><span class="xp-role">UX/UI设计师</span><span class="xp-time">24.01~26.04</span></div>
+            <div class="xp-row"><span class="xp-dot"></span><span class="xp-company">微脉技术有限公司</span><span class="xp-role">体验设计组长</span><span class="xp-time">21.07~23.06</span></div>
+            <div class="xp-row"><span class="xp-dot"></span><span class="xp-company">浙江核新同花顺网络信息股份有限公司</span><span class="xp-role">UX/UI设计师</span><span class="xp-time">18.04~21.06</span></div>
+            <div class="xp-row"><span class="xp-dot"></span><span class="xp-company">三替集团有限公司</span><span class="xp-role">UI设计师</span><span class="xp-time">17.02~18.04</span></div>
+            <div class="xp-row"><span class="xp-dot"></span><span class="xp-company">杭州华之赢投资管理有限公司</span><span class="xp-role">UI设计师</span><span class="xp-time">13.11~17.02</span></div>
+          </div>
+
+          <h4 class="about-subtitle">技能 / Skills<span class="dot"></span></h4>
+          <div class="tags">
+            <span class="tag hl">全链路体验</span>
+            <span class="tag">数据驱动设计</span>
+            <span class="tag">0→1 设计体系</span>
+            <span class="tag">信息架构</span>
+            <span class="tag">B端/C端融合</span>
+            <span class="tag">用户洞察</span>
+            <span class="tag">AI产品体验</span>
+            <span class="tag">自然语言交互</span>
+            <span class="tag">团队管理</span>
+          </div>
+
+          <h4 class="about-subtitle" style="margin-top:36px;">工具 / Tools<span class="dot"></span></h4>
+          <div class="tags">
+            <span class="tag">Figma</span><span class="tag">Sketch</span><span class="tag">MasterGo</span>
+            <span class="tag">PS</span><span class="tag">AI</span><span class="tag">Ae</span>
+            <span class="tag hl">ChatGPT</span><span class="tag">即梦</span>
+          </div>
         </div>
+
         <div class="about-side">
-          <div class="tag-blk">
-            <h4>技能 / Skills</h4>
-            <div class="tags">
-              <span class="tag hl">全链路体验</span>
-              <span class="tag">数据驱动设计</span>
-              <span class="tag">0→1 设计体系</span>
-              <span class="tag">信息架构</span>
-              <span class="tag">B端/C端融合</span>
-              <span class="tag">用户洞察</span>
-              <span class="tag">AI产品体验</span>
-              <span class="tag">自然语言交互</span>
-              <span class="tag">团队管理</span>
+          <div class="portrait-card">
+            <img src="assets/portrait.jpg" alt="李山 个人形象照片" width="720" height="960" loading="lazy" decoding="async">
+            <div class="portrait-info">
+              <span class="pi-name">李山</span>
+              <span class="pi-divider"></span>
+              <span class="pi-role">产品体验设计师</span>
             </div>
           </div>
-          <div class="tag-blk">
-            <h4>工具 / Tools</h4>
-            <div class="tags">
-              <span class="tag">Figma</span><span class="tag">Sketch</span><span class="tag">MasterGo</span>
-              <span class="tag">PS</span><span class="tag">AI</span><span class="tag">Ae</span>
-              <span class="tag hl">ChatGPT</span><span class="tag">即梦</span>
+          <div class="about-contact">
+            <a href="tel:17606520488" class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.5"/></svg>
+              <span>17606520488 <em>(WeChat)</em></span>
+            </a>
+            <a href="mailto:474674874@qq.com" class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5"/><polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.5"/></svg>
+              <span>474674874@qq.com</span>
+            </a>
+            <div class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M22 10L12 5 2 10l10 5 10-5z" stroke="currentColor" stroke-width="1.5"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" stroke="currentColor" stroke-width="1.5"/><path d="M22 10v6" stroke="currentColor" stroke-width="1.5"/></svg>
+              <span>齐齐哈尔大学 · 本科 · 艺术设计</span>
             </div>
           </div>
-          <div class="xp">
-            <div class="xp-item"><div class="t">2024.01–2026.04</div><div class="c"><b>软通动力&nbsp; &nbsp;&nbsp;<span class="role">UX/UI设计师</span></b><p>阿里云智能生态用工项目，创新界面布局，搭建组件规范，深度参与AI产品全链路设计。</p></div></div>
-            <div class="xp-item"><div class="t">2021.07–2023.06</div><div class="c"><b>微脉技术&nbsp; &nbsp;&nbsp;<span class="role">体验设计组长</span></b><p>带领5人团队，主导设计规范系统上线，研发效率提升40%，开展适老化设计研究。</p></div></div>
-            <div class="xp-item"><div class="t">2018.04–2021.06</div><div class="c"><b>同花顺&nbsp; &nbsp;&nbsp;<span class="role">UI/UX设计师</span></b><p>主导直播、问答、群聊核心场景，重构「观看-互动-转化」主流程，互动率1.5%→3%。</p></div></div>
-            <div class="xp-item"><div class="t">2017.02–2018.04</div><div class="c"><b>三替集团&nbsp; &nbsp;&nbsp;<span class="role">UI设计师</span></b><p>主导「三替好生活」APP及服务端、商户后台、官网UI设计。</p></div></div>
-            <div class="xp-item"><div class="t">2013.11–2017.02</div><div class="c"><b>华之赢投资&nbsp; &nbsp;&nbsp;<span class="role">UI设计师</span></b><p>负责华赢贷、华赢宝APP全流程UI设计与多轮迭代。</p></div></div>
-          </div>
-          <p class="edu"><b>教育</b>：齐齐哈尔大学 · 本科 · 艺术设计专业 · 2013届</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WORK -->
+  <!-- ADVANTAGES -->
+  <section class="sec" id="advantages">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="no">02 / Strengths</span>
+        <h2>个人优势</h2>
+        <span class="sec-en">How I work</span>
+      </div>
+      <p class="adv-lead">不是只会画界面，而是能沿着业务目标、用户路径与研发约束，把体验判断落到可量化的结果。</p>
+      <div class="adv-list">
+        <article class="adv-item reveal">
+          <span class="adv-no">01</span>
+          <div>
+            <h3>数据驱动的体验判断</h3>
+            <p>把埋点、A/B结果与用户反馈转成设计决策，而不是凭感觉出稿。</p>
+            <strong>先量化，再拍板，用复盘形成闭环。</strong>
+          </div>
+        </article>
+        <article class="adv-item reveal">
+          <span class="adv-no">02</span>
+          <div>
+            <h3>设计系统与研发映射</h3>
+            <p>让设计规范与前端组件一一对应，推动跨团队提效与一致性落地。</p>
+            <strong>40% 研发提效，规范覆盖 80% 以上场景。</strong>
+          </div>
+        </article>
+        <article class="adv-item reveal">
+          <span class="adv-no">03</span>
+          <div>
+            <h3>复杂B端 + 千万级C端平衡</h3>
+            <p>既做过千万日活的C端直播，也搭过B端设计系统与AI决策平台。</p>
+            <strong>用同一套方法驾驭两种复杂度。</strong>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section class="sec" id="method">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="no">03 / Method</span>
+        <h2>方法论</h2>
+        <span class="sec-en">Design process</span>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="n">01</div><h4>发现</h4><p>从用户洞察与埋点数据出发，识别真实痛点与业务机会。</p><span class="en">Discover</span></div>
+        <div class="step"><div class="n">02</div><h4>定义</h4><p>重构信息架构，明确核心主流程，锁定可量化的设计目标。</p><span class="en">Define</span></div>
+        <div class="step"><div class="n">03</div><h4>设计</h4><p>统一视觉体系，沉淀设计规范与组件，映射为开发组件。</p><span class="en">Design</span></div>
+        <div class="step"><div class="n">04</div><h4>验证</h4><p>通过A/B与数据复盘验证价值，推动迭代与长期增长。</p><span class="en">Validate</span></div>
+      </div>
+    </div>
+  </section>
+
+<!-- WORK -->
   <section class="work sec" id="work">
     <div class="wrap">
       <div class="sec-head">
-        <span class="no">02 / Selected Work</span>
+        <span class="no">04 / Selected Work</span>
         <h2>精选作品</h2>
         <span class="sec-en">Selected projects</span>
       </div>
@@ -644,62 +767,7 @@
     </div>
   </section>
 
-  <!-- ADVANTAGES -->
-  <section class="sec" id="advantages">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="no">03 / Strengths</span>
-        <h2>个人优势</h2>
-        <span class="sec-en">How I work</span>
-      </div>
-      <p class="adv-lead">不是只会画界面，而是能沿着业务目标、用户路径与研发约束，把体验判断落到可量化的结果。</p>
-      <div class="adv-list">
-        <article class="adv-item reveal">
-          <span class="adv-no">01</span>
-          <div>
-            <h3>数据驱动的体验判断</h3>
-            <p>把埋点、A/B结果与用户反馈转成设计决策，而不是凭感觉出稿。</p>
-            <strong>先量化，再拍板，用复盘形成闭环。</strong>
-          </div>
-        </article>
-        <article class="adv-item reveal">
-          <span class="adv-no">02</span>
-          <div>
-            <h3>设计系统与研发映射</h3>
-            <p>让设计规范与前端组件一一对应，推动跨团队提效与一致性落地。</p>
-            <strong>40% 研发提效，规范覆盖 80% 以上场景。</strong>
-          </div>
-        </article>
-        <article class="adv-item reveal">
-          <span class="adv-no">03</span>
-          <div>
-            <h3>复杂B端 + 千万级C端平衡</h3>
-            <p>既做过千万日活的C端直播，也搭过B端设计系统与AI决策平台。</p>
-            <strong>用同一套方法驾驭两种复杂度。</strong>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- METHOD -->
-  <section class="sec" id="method">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="no">04 / Method</span>
-        <h2>方法论</h2>
-        <span class="sec-en">Design process</span>
-      </div>
-      <div class="steps">
-        <div class="step"><div class="n">01</div><h4>发现</h4><p>从用户洞察与埋点数据出发，识别真实痛点与业务机会。</p><span class="en">Discover</span></div>
-        <div class="step"><div class="n">02</div><h4>定义</h4><p>重构信息架构，明确核心主流程，锁定可量化的设计目标。</p><span class="en">Define</span></div>
-        <div class="step"><div class="n">03</div><h4>设计</h4><p>统一视觉体系，沉淀设计规范与组件，映射为开发组件。</p><span class="en">Design</span></div>
-        <div class="step"><div class="n">04</div><h4>验证</h4><p>通过A/B与数据复盘验证价值，推动迭代与长期增长。</p><span class="en">Validate</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
+<!-- CONTACT -->
   <section class="contact" id="contact">
     <span class="watermark" aria-hidden="true">你好</span>
     <div class="wrap">
@@ -785,17 +853,26 @@
     setTimeout(()=>{ if(loaded<total) finish(); }, 12000);
   })();
 
-  // custom cursor
-  const cursor = document.getElementById('cursor');
-  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
-    document.addEventListener('mousemove', e => {
-      cursor.style.setProperty('--cx', e.clientX + 'px');
-      cursor.style.setProperty('--cy', e.clientY + 'px');
-    });
-    document.querySelectorAll('a,button,.p-media,.tag').forEach(el=>{
-      el.addEventListener('mouseenter',()=>cursor.classList.add('grow'));
-      el.addEventListener('mouseleave',()=>cursor.classList.remove('grow'));
-    });
+  // cursor glow (mouse-following gradient, desktop only)
+  if(!REDUCE && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    const glow = document.getElementById('cursorGlow');
+    if(glow){
+      let mx = window.innerWidth/2, my = window.innerHeight/2;
+      let gx = mx, gy = my;
+      let raf = 0;
+      const lerp = (a,b,t) => a + (b-a)*t;
+      const loop = () => {
+        gx = lerp(gx, mx, 0.08);
+        gy = lerp(gy, my, 0.08);
+        glow.style.transform = `translate(${gx}px, ${gy}px) translate(-50%,-50%)`;
+        raf = requestAnimationFrame(loop);
+      };
+      window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      document.addEventListener('mouseenter', () => { glow.classList.add('active'); });
+      document.addEventListener('mouseleave', () => { glow.classList.remove('active'); });
+      if(document.hasFocus()) glow.classList.add('active');
+      raf = requestAnimationFrame(loop);
+    }
   }
 
   // nav scroll state + burger menu
