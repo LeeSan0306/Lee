@@ -12,12 +12,17 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="李山 · UI/UX设计师">
 <meta property="og:description" content="李山，10年+全链路体验设计师，覆盖千万级C端产品与复杂B端系统，数据驱动体验升级，设计系统落地专家。">
-<meta property="og:image" content="assets/portrait.jpg">
+<meta property="og:image" content="assets/portrait.webp">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0F1C'/%3E%3Ctext x='32' y='42' font-family='Arial, sans-serif' font-size='30' font-weight='900' fill='%234F8BF9' text-anchor='middle'%3EL.%3C/text%3E%3C/svg%3E">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="favicon.ico">
 <link rel="preload" href="assets/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="assets/portrait.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/cover-ai.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/cover-live.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/cover-ds.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/cover-dash.webp" fetchpriority="high">
 <style>
   /* local fonts (self-hosted, no external CDN dependency) */
   @font-face{font-family:'Archivo';font-style:normal;font-weight:500 900;font-display:swap;src:url('assets/fonts/archivo-variable.woff2') format('woff2');}
@@ -788,7 +793,7 @@
           <!-- 移动端专属：圆形头像 + 文案 -->
           <div class="about-mobile-hero">
             <div class="about-mobile-avatar">
-              <img src="assets/portrait.jpg" alt="李山头像">
+              <img src="assets/portrait.webp" alt="李山头像">
             </div>
             <h2 class="about-mobile-title">李山<span>｜UI/UX设计师</span></h2>
           </div>
@@ -858,7 +863,7 @@
         <div class="about-new-right">
           <div class="about-new-image">
             <div class="about-img-tag">About Me</div>
-            <img src="assets/portrait.jpg" alt="李山 个人形象照片" loading="lazy" decoding="async">
+            <img src="assets/portrait.webp" alt="李山 个人形象照片" loading="lazy" decoding="async" width="720" height="960">
             <div class="about-img-overlay"></div>
           </div>
           <div class="about-new-stats">
@@ -943,7 +948,7 @@
       <div class="projects-fm-grid">
         <a href="javascript:void(0)" class="proj-fm-card" data-open="ai">
           <div class="proj-fm-media">
-            <img src="assets/cover-ai.jpg" alt="AI组织智汇站" loading="lazy" decoding="async">
+            <img src="assets/cover-ai.webp" alt="AI组织智汇站" loading="lazy" decoding="async" width="1400" height="787">
             <div class="proj-fm-overlay"></div>
             <div class="proj-fm-actions">
               <span class="proj-fm-btn">查看详情</span>
@@ -958,7 +963,7 @@
         </a>
         <a href="javascript:void(0)" class="proj-fm-card" data-open="live">
           <div class="proj-fm-media">
-            <img src="assets/cover-live.jpg" alt="同花顺财经直播" loading="lazy" decoding="async">
+            <img src="assets/cover-live.webp" alt="同花顺财经直播" loading="lazy" decoding="async" width="1400" height="787">
             <div class="proj-fm-overlay"></div>
             <div class="proj-fm-actions">
               <span class="proj-fm-btn">查看详情</span>
@@ -973,7 +978,7 @@
         </a>
         <a href="javascript:void(0)" class="proj-fm-card" data-open="ds">
           <div class="proj-fm-media">
-            <img src="assets/cover-ds.jpg" alt="设计系统建设" loading="lazy" decoding="async">
+            <img src="assets/cover-ds.webp" alt="设计系统建设" loading="lazy" decoding="async" width="1400" height="787">
             <div class="proj-fm-overlay"></div>
             <div class="proj-fm-actions">
               <span class="proj-fm-btn">查看详情</span>
@@ -988,7 +993,7 @@
         </a>
         <a href="javascript:void(0)" class="proj-fm-card" data-open="dash">
           <div class="proj-fm-media">
-            <img src="assets/cover-dash.jpg" alt="数据可视化大屏" loading="lazy" decoding="async">
+            <img src="assets/cover-dash.webp" alt="数据可视化大屏" loading="lazy" decoding="async" width="1400" height="787">
             <div class="proj-fm-overlay"></div>
             <div class="proj-fm-actions">
               <span class="proj-fm-btn">查看详情</span>
@@ -1076,10 +1081,10 @@
   })();
   const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const PROJECTS = {
-    ai:   { title:"AI组织智汇站 · 组织级决策智能系统设计", meta:"AI产品设计 / B端平台 / Agent · 核心体验设计负责人", imgs:["assets/case-ai.jpg"] },
-    live: { title:"同花顺财经直播 · 体验设计迭代", meta:"体验设计 / 金融直播 / 数据驱动 · 核心设计负责人", imgs:["assets/case-live.jpg"] },
-    ds:   { title:"B端设计系统 · 组件化落地", meta:"设计系统 / B端 / 组件化 · 项目负责人", imgs:["assets/case-ds.jpg"] },
-    dash: { title:"数据可视化大屏设计", meta:"数据可视化 / B端大屏 / 医疗 · UI 设计", imgs:["assets/case-dash.jpg"] }
+    ai:   { title:"AI组织智汇站 · 组织级决策智能系统设计", meta:"AI产品设计 / B端平台 / Agent · 核心体验设计负责人", imgs:["assets/case-ai.webp"] },
+    live: { title:"同花顺财经直播 · 体验设计迭代", meta:"体验设计 / 金融直播 / 数据驱动 · 核心设计负责人", imgs:["assets/case-live.webp"] },
+    ds:   { title:"B端设计系统 · 组件化落地", meta:"设计系统 / B端 / 组件化 · 项目负责人", imgs:["assets/case-ds.webp"] },
+    dash: { title:"数据可视化大屏设计", meta:"数据可视化 / B端大屏 / 医疗 · UI 设计", imgs:["assets/case-dash.webp"] }
   };
   // Contact 表单提交
   (function initContactForm(){
@@ -1122,20 +1127,21 @@
     }, { threshold: 0.3 });
     bars.forEach(bar => observer.observe(bar));
   })();
-  // preload critical images only (portrait + covers), detail images lazy-load in lightbox
+  // 快速预加载：并行加载首屏关键图片，缩短loading展示时间
   (function preload(){
     const loader = document.getElementById('loader');
     const fill = document.getElementById('loaderFill');
     const pct = document.getElementById('loaderPct');
     if(!loader) return;
     document.body.classList.add('is-loading');
+    // 首屏关键图片：portrait(about模块首屏可见) + 4张cover(作品模块)
     const images = [
-      'assets/portrait.jpg',
-      'assets/cover-ai.jpg','assets/cover-live.jpg','assets/cover-ds.jpg','assets/cover-dash.jpg'
+      'assets/portrait.webp',
+      'assets/cover-ai.webp','assets/cover-live.webp','assets/cover-ds.webp','assets/cover-dash.webp'
     ];
     let loaded = 0; const total = images.length;
     const startTime = Date.now();
-    const minDisplay = 600; // minimum loader display time to avoid flash
+    const minDisplay = 200; // 最小展示时间，避免闪烁
     const update = () => { const p=Math.round((loaded/total)*100); fill.style.width=p+'%'; pct.textContent=p+'%'; };
     const finish = () => {
       fill.style.width='100%'; pct.textContent='100%';
@@ -1144,15 +1150,18 @@
       setTimeout(()=>{
         document.body.classList.remove('is-loading');
         loader.classList.add('done');
-        setTimeout(()=>loader.classList.add('done-gone'), 260);
+        setTimeout(()=>loader.classList.add('done-gone'), 200);
       }, delay);
     };
-    images.forEach(src=>{
+    // 并行加载，任意一张失败不阻塞整体
+    const promises = images.map(src => new Promise(resolve => {
       const img = new Image();
-      img.onload = img.onerror = () => { loaded++; update(); if(loaded>=total) finish(); };
+      img.onload = img.onerror = () => { loaded++; update(); resolve(); };
       img.src = src;
-    });
-    setTimeout(()=>{ if(loaded<total) finish(); }, 8000);
+    }));
+    Promise.all(promises).then(finish);
+    // 超时保护：4秒后强制完成，避免网络差时长时间白屏
+    setTimeout(()=>{ if(loaded<total) finish(); }, 4000);
   })();
   // nav scroll state + burger menu
   const nav = document.getElementById('nav');
@@ -1250,7 +1259,7 @@
         lbTop = document.getElementById('lbTop');
   let lbImgs = [], lbIdx = 0, lastFocus = null;
   const DIM = {
-    'assets/case-ai.jpg':[1400,10551], 'assets/case-live.jpg':[1400,22284], 'assets/case-ds.jpg':[1400,9140], 'assets/case-dash.jpg':[1400,3340]
+    'assets/case-ai.webp':[1400,10551], 'assets/case-live.webp':[1005,16000], 'assets/case-ds.webp':[1400,9140], 'assets/case-dash.webp':[1400,3340]
   };
   function dimAttr(s){ const d=DIM[s]; return d?`width="${d[0]}" height="${d[1]}"`:'width="1200" height="900"'; }
   function setLbIndex(i, smooth=true){
