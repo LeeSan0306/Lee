@@ -311,13 +311,14 @@
   .about-contact-item{display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:rgba(255,255,255,.7);text-decoration:none;font-size:14px;transition:border-color .25s,background-color .25s,color .25s;}
   .about-contact-item:hover{border-color:rgba(100,180,255,.4);background:rgba(100,180,255,.08);color:#fff;}
   .about-contact-item svg{flex-shrink:0;color:rgba(100,180,255,.8);}
-  /* 工作经历 - 一行展示 */
+  /* 工作经历 - 两行展示 */
   .about-work-list{display:flex;flex-direction:column;}
-  .work-row{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+  .work-row{display:flex;flex-direction:column;gap:6px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);}
   .work-row:last-child{border-bottom:none;}
-  .work-row-company{flex:1;font-weight:600;color:#fff;font-size:16px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .work-row-role{color:rgba(255,255,255,.75);font-size:clamp(12px,1.1vw,14px);flex-shrink:0;}
-  .work-row-year{font-family:var(--font-mono);font-size:clamp(12px,1vw,13px);color:rgba(100,180,255,.7);flex-shrink:0;min-width:110px;text-align:right;}
+  .work-row-top{display:flex;align-items:center;gap:16px;}
+  .work-row-company{flex:1;font-weight:600;color:#fff;font-size:14px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .work-row-role{color:rgba(255,255,255,.75);font-size:14px;}
+  .work-row-year{font-family:var(--font-mono);font-size:14px;color:rgba(100,180,255,.7);flex-shrink:0;text-align:right;}
   .work-row-edu .work-row-company{color:rgba(96,165,250,.9);}
   /* 右侧图片 */
   .about-new-right{display:flex;flex-direction:column;gap:32px;}
@@ -338,9 +339,9 @@
   }
   @media (max-width:520px){
     .about-new-contact{grid-template-columns:1fr;}
-    .work-row{flex-wrap:wrap;gap:6px 12px;}
-    .work-row-company{width:100%;white-space:normal;}
-    .work-row-year{min-width:auto;text-align:left;}
+    .work-row{gap:4px;}
+    .work-row-top{gap:12px;}
+    .work-row-company{white-space:normal;}
     .about-new-stats{gap:10px;}
     .about-stat-num{font-size:22px;}
   }
@@ -362,14 +363,15 @@
     .about-mobile-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px;padding:16px 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);}
     .about-mobile-stats .about-stat-num{font-size:24px;}
     .about-mobile-stats .about-stat-label{font-size:12px;}
-    /* 工作经历 - 与web端一致的一行展示 */
+    /* 工作经历 - 与web端一致的两行展示 */
     .about-work-list{position:static;padding-left:0;}
     .about-work-list::before{display:none;}
-    .work-row{position:static;flex-direction:row;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+    .work-row{position:static;flex-direction:column;gap:4px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);}
     .work-row::before{display:none;}
-    .work-row-company{flex:1;width:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:16px;min-width:0;}
-    .work-row-role{font-size:12px;color:rgba(255,255,255,.75);flex-shrink:0;}
-    .work-row-year{font-size:12px;min-width:95px;text-align:right;color:rgba(100,180,255,.7);flex-shrink:0;}
+    .work-row-top{display:flex;align-items:center;gap:12px;}
+    .work-row-company{flex:1;width:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px;min-width:0;}
+    .work-row-role{font-size:14px;color:rgba(255,255,255,.75);}
+    .work-row-year{font-size:14px;text-align:right;color:rgba(100,180,255,.7);flex-shrink:0;}
   }
   /* ---------- skills - Figma Make style ---------- */
   .skills-fm{padding:clamp(80px,10vw,120px) 0;position:relative;overflow:hidden;}
@@ -827,37 +829,49 @@
               <span>474674874@qq.com</span>
             </a>
           </div>
-          <!-- 工作经历 - 一行展示 -->
+          <!-- 工作经历 - 两行展示 -->
           <div class="about-work-list">
             <div class="work-row">
-              <span class="work-row-company">软通动力信息技术(集团)股份有限公司</span>
+              <div class="work-row-top">
+                <span class="work-row-company">软通动力信息技术(集团)股份有限公司</span>
+                <span class="work-row-year">24.01 ~ 26.04</span>
+              </div>
               <span class="work-row-role">UI/UX设计师</span>
-              <span class="work-row-year">24.01 ~ 26.04</span>
             </div>
             <div class="work-row">
-              <span class="work-row-company">微脉技术有限公司</span>
+              <div class="work-row-top">
+                <span class="work-row-company">微脉技术有限公司</span>
+                <span class="work-row-year">21.07 ~ 23.06</span>
+              </div>
               <span class="work-row-role">体验设计组长</span>
-              <span class="work-row-year">21.07 ~ 23.06</span>
             </div>
             <div class="work-row">
-              <span class="work-row-company">浙江核新同花顺网络信息股份有限公司</span>
+              <div class="work-row-top">
+                <span class="work-row-company">浙江核新同花顺网络信息股份有限公司</span>
+                <span class="work-row-year">18.04 ~ 21.06</span>
+              </div>
               <span class="work-row-role">UI/UX设计师</span>
-              <span class="work-row-year">18.04 ~ 21.06</span>
             </div>
             <div class="work-row">
-              <span class="work-row-company">三替集团有限公司</span>
+              <div class="work-row-top">
+                <span class="work-row-company">三替集团有限公司</span>
+                <span class="work-row-year">17.02 ~ 18.04</span>
+              </div>
               <span class="work-row-role">UI设计师</span>
-              <span class="work-row-year">17.02 ~ 18.04</span>
             </div>
             <div class="work-row">
-              <span class="work-row-company">杭州华之赢投资管理有限公司</span>
+              <div class="work-row-top">
+                <span class="work-row-company">杭州华之赢投资管理有限公司</span>
+                <span class="work-row-year">13.11 ~ 17.02</span>
+              </div>
               <span class="work-row-role">UI设计师</span>
-              <span class="work-row-year">13.11 ~ 17.02</span>
             </div>
             <div class="work-row work-row-edu">
-              <span class="work-row-company">齐齐哈尔大学</span>
+              <div class="work-row-top">
+                <span class="work-row-company">齐齐哈尔大学</span>
+                <span class="work-row-year">09.09 ~ 13.07</span>
+              </div>
               <span class="work-row-role">本科 · 艺术设计</span>
-              <span class="work-row-year">09.09 ~ 13.07</span>
             </div>
           </div>
         </div>
