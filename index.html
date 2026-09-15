@@ -263,8 +263,8 @@
   /* 按钮组 */
   .hero-cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
   .hero-cta .btn{width:174px;justify-content:center;}
-  .btn-gradient{background:linear-gradient(135deg,var(--accent),#2563EB);border:none;color:#fff;box-shadow:0 8px 24px rgba(79,139,249,.35),inset 0 1px 0 rgba(255,255,255,.12);transition:opacity .25s,transform .25s,box-shadow .25s;}
-  .btn-gradient:hover{opacity:.92;transform:translateY(-2px);box-shadow:0 12px 36px rgba(79,139,249,.5),inset 0 1px 0 rgba(255,255,255,.15);}
+  .btn-gradient{background:linear-gradient(135deg,var(--accent),#2563EB);border:none;color:#fff;transition:opacity .25s,transform .25s;}
+  .btn-gradient:hover{opacity:.92;transform:translateY(-2px);}
   .btn-gradient:active{transform:translateY(0) scale(.98);}
   .btn-outline-light{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);transition:opacity .25s,transform .25s,border-color .25s,color .25s,background-color .25s;}
   .btn-outline-light:hover{border-color:rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.05);transform:translateY(-2px);}
@@ -284,8 +284,8 @@
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 20px;border-radius:99px;border:1px solid var(--line-strong);background:transparent;color:var(--fg);font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;font-size:15px;font-weight:400;cursor:pointer;transition:opacity .25s,transform .25s,border-color .25s,background-color .25s,color .25s;}
   .btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.35);}
   .btn:active{transform:translateY(0) scale(.98);}
-  .btn.accent{background:linear-gradient(135deg,var(--accent),#2563EB);border-color:transparent;color:#fff;box-shadow:0 8px 24px rgba(79,139,249,.35);}
-  .btn.accent:hover{box-shadow:0 12px 36px rgba(79,139,249,.5);}
+  .btn.accent{background:linear-gradient(135deg,var(--accent),#2563EB);border-color:transparent;color:#fff;}
+  .btn.accent:hover{opacity:.92;}
   .btn.ghost{background:transparent;}
   .btn.ghost:hover{border-color:var(--accent);color:var(--accent);}
   /* ---------- about - 参考图重新设计 ---------- */
@@ -421,8 +421,8 @@
   .proj-fm-card:hover .proj-fm-overlay{opacity:1;}
   .proj-fm-actions{position:absolute;bottom:16px;right:16px;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;}
   .proj-fm-card:hover .proj-fm-actions{opacity:1;transform:translateY(0);}
-  .proj-fm-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 20px;border-radius:99px;border:none;background:linear-gradient(135deg,var(--accent),#2563EB);color:#fff;font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;font-size:15px;font-weight:400;cursor:pointer;box-shadow:0 8px 24px rgba(79,139,249,.35);transition:opacity .25s,transform .25s,box-shadow .25s;}
-  .proj-fm-btn:hover{opacity:.92;transform:translateY(-2px);box-shadow:0 12px 36px rgba(79,139,249,.5);}
+  .proj-fm-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 20px;border-radius:99px;border:none;background:linear-gradient(135deg,var(--accent),#2563EB);color:#fff;font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;font-size:15px;font-weight:400;cursor:pointer;transition:opacity .25s,transform .25s;}
+  .proj-fm-btn:hover{opacity:.92;transform:translateY(-2px);}
   .proj-fm-btn:active{transform:translateY(0) scale(.98);}
   .proj-fm-info{padding:24px;}
   .proj-fm-cat{color:#6BA4FC;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;font-weight:600;}
@@ -532,8 +532,8 @@
   .contact-cover-meta-dot{opacity:.3;}
   .contact-cover-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
   .contact-cover-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 20px;border-radius:99px;border:none;background:transparent;color:#fff;font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;font-size:15px;font-weight:400;cursor:pointer;transition:opacity .25s,transform .25s,box-shadow .25s,border-color .25s;text-decoration:none;width:174px;white-space:nowrap;}
-  .contact-cover-btn-primary{background:linear-gradient(135deg,var(--accent),#2563EB);color:#fff;box-shadow:0 8px 24px rgba(79,139,249,.35);}
-  .contact-cover-btn-primary:hover{opacity:.92;transform:translateY(-2px);box-shadow:0 12px 36px rgba(79,139,249,.5);}
+  .contact-cover-btn-primary{background:linear-gradient(135deg,var(--accent),#2563EB);color:#fff;}
+  .contact-cover-btn-primary:hover{opacity:.92;transform:translateY(-2px);}
   .contact-cover-btn-primary:active{transform:translateY(0) scale(.98);}
   .contact-cover-btn-secondary{background:transparent;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);}
   .contact-cover-btn-secondary:hover{border-color:rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.05);transform:translateY(-2px);}
@@ -584,8 +584,8 @@
   .contact-fm-field input::-webkit-input-placeholder,.contact-fm-field textarea::-webkit-input-placeholder{color:rgba(255,255,255,.4);}
   .contact-fm-field input:focus,.contact-fm-field textarea:focus{border-color:rgba(59,130,246,.5);background:rgba(255,255,255,.08);}
   .contact-fm-field textarea{resize:none;}
-  .contact-fm-submit{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:48px;padding:0 20px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--accent),#2563EB);color:#fff;font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;font-size:15px;font-weight:400;cursor:pointer;box-shadow:0 8px 24px rgba(79,139,249,.35);transition:opacity .25s,transform .25s,box-shadow .25s;margin-top:4px;}
-  .contact-fm-submit:hover{opacity:.92;transform:translateY(-2px);box-shadow:0 12px 36px rgba(79,139,249,.5);}
+  .contact-fm-submit{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:48px;padding:0 20px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--accent),#2563EB);color:#fff;font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;font-size:15px;font-weight:400;cursor:pointer;transition:opacity .25s,transform .25s;margin-top:4px;}
+  .contact-fm-submit:hover{opacity:.92;transform:translateY(-2px);}
   .contact-fm-submit:active{transform:translateY(0) scale(.98);}
   .contact-fm-submit svg{width:15px;height:15px;}
   @media (max-width:768px){
