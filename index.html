@@ -263,12 +263,6 @@
   /* 按钮组 */
   .hero-cta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
   .hero-cta .btn{width:174px;justify-content:center;}
-  .btn-gradient{background:linear-gradient(135deg,var(--accent),#2563EB);border:none;color:#fff;transition:opacity .25s,transform .25s;}
-  .btn-gradient:hover{opacity:.92;transform:translateY(-2px);}
-  .btn-gradient:active{transform:translateY(0) scale(.98);}
-  .btn-outline-light{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);transition:opacity .25s,transform .25s,border-color .25s,color .25s,background-color .25s;}
-  .btn-outline-light:hover{border-color:rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.05);transform:translateY(-2px);}
-  .btn-outline-light:active{transform:translateY(0) scale(.98);}
   /* 底部标语 */
   .hero-bottom-text{position:absolute;bottom:clamp(24px,4vh,48px);left:50%;transform:translateX(-50%);z-index:4;font-family:var(--font-serif);font-style:italic;font-size:clamp(12px,1vw,14px);color:rgba(100,180,255,0.5);letter-spacing:.05em;white-space:nowrap;}
   @media (max-width:768px){
@@ -288,6 +282,12 @@
   .btn.accent:hover{opacity:.92;}
   .btn.ghost{background:transparent;}
   .btn.ghost:hover{border-color:var(--accent);color:var(--accent);}
+  .btn-gradient{background:linear-gradient(135deg,var(--accent),#2563EB);border:none;color:#fff;transition:opacity .25s,transform .25s;}
+  .btn-gradient:hover{opacity:.92;transform:translateY(-2px);}
+  .btn-gradient:active{transform:translateY(0) scale(.98);}
+  .btn-outline-light{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);transition:opacity .25s,transform .25s,border-color .25s,color .25s,background-color .25s;}
+  .btn-outline-light:hover{border-color:rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.05);transform:translateY(-2px);}
+  .btn-outline-light:active{transform:translateY(0) scale(.98);}
   /* ---------- about - 参考图重新设计 ---------- */
   .about-fm{padding:clamp(80px,10vw,120px) 0;position:relative;overflow:hidden;}
   .about-new-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:clamp(40px,5vw,70px);align-items:center;position:relative;z-index:2;}
