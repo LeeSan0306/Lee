@@ -27,16 +27,10 @@
 <link rel="preload" as="image" href="assets/cover-live.webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/cover-ds.webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/cover-dash.webp" fetchpriority="high">
-<link rel="preload" as="image" href="assets/detail-ai-1.jpg">
-<link rel="preload" as="image" href="assets/detail-ai-2.jpg">
-<link rel="preload" as="image" href="assets/detail-ai-3.jpg">
-<link rel="preload" as="image" href="assets/detail-dash-1.jpg">
-<link rel="preload" as="image" href="assets/detail-dash-2.jpg">
-<link rel="preload" as="image" href="assets/detail-ds-1.jpg">
-<link rel="preload" as="image" href="assets/detail-ds-2.jpg">
-<link rel="preload" as="image" href="assets/detail-live-1.jpg">
-<link rel="preload" as="image" href="assets/detail-live-2.jpg">
-<link rel="preload" as="image" href="assets/detail-live-3.jpg">
+<link rel="preload" as="image" href="assets/case-ai.webp">
+<link rel="preload" as="image" href="assets/case-live.webp">
+<link rel="preload" as="image" href="assets/case-ds.webp">
+<link rel="preload" as="image" href="assets/case-dash.webp">
 <style>
   /* local fonts (self-hosted, no external CDN dependency) */
   @font-face{font-family:'Archivo';font-style:normal;font-weight:500 900;font-display:swap;src:url('assets/fonts/archivo-variable.woff2') format('woff2');}
@@ -1025,7 +1019,7 @@
   <section class="hero" id="home">
     <!-- 电影感视频背景 -->
     <div class="hero-video-plate">
-      <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero-video-poster.webp" aria-hidden="true">
         <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260818_072341_50851634-bbc3-4c33-9acc-7647d4db44aa.mp4" type="video/mp4">
       </video>
     </div>
@@ -1513,15 +1507,12 @@
     const pct = document.getElementById('loaderPct');
     if(!loader) return;
     document.body.classList.add('is-loading');
-    // 全部关键资源：logo + 头像 + 作品封面 + 作品详情图
+    // 全部关键资源：logo + 头像 + 作品封面 + 作品详情长图
     const images = [
       'assets/logo-horsehead.jpg',
       'assets/portrait.webp',
       'assets/cover-ai.webp','assets/cover-live.webp','assets/cover-ds.webp','assets/cover-dash.webp',
-      'assets/detail-ai-1.jpg','assets/detail-ai-2.jpg','assets/detail-ai-3.jpg',
-      'assets/detail-dash-1.jpg','assets/detail-dash-2.jpg',
-      'assets/detail-ds-1.jpg','assets/detail-ds-2.jpg',
-      'assets/detail-live-1.jpg','assets/detail-live-2.jpg','assets/detail-live-3.jpg'
+      'assets/case-ai.webp','assets/case-live.webp','assets/case-ds.webp','assets/case-dash.webp'
     ];
     let loaded = 0; const total = images.length;
     const startTime = Date.now();
