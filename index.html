@@ -21,11 +21,22 @@
 <link rel="apple-touch-icon" href="favicon.ico">
 <link rel="preload" href="assets/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="assets/logo-horsehead.jpg" fetchpriority="high">
 <link rel="preload" as="image" href="assets/portrait.webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/cover-ai.webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/cover-live.webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/cover-ds.webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/cover-dash.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/detail-ai-1.jpg">
+<link rel="preload" as="image" href="assets/detail-ai-2.jpg">
+<link rel="preload" as="image" href="assets/detail-ai-3.jpg">
+<link rel="preload" as="image" href="assets/detail-dash-1.jpg">
+<link rel="preload" as="image" href="assets/detail-dash-2.jpg">
+<link rel="preload" as="image" href="assets/detail-ds-1.jpg">
+<link rel="preload" as="image" href="assets/detail-ds-2.jpg">
+<link rel="preload" as="image" href="assets/detail-live-1.jpg">
+<link rel="preload" as="image" href="assets/detail-live-2.jpg">
+<link rel="preload" as="image" href="assets/detail-live-3.jpg">
 <style>
   /* local fonts (self-hosted, no external CDN dependency) */
   @font-face{font-family:'Archivo';font-style:normal;font-weight:500 900;font-display:swap;src:url('assets/fonts/archivo-variable.woff2') format('woff2');}
@@ -1502,14 +1513,19 @@
     const pct = document.getElementById('loaderPct');
     if(!loader) return;
     document.body.classList.add('is-loading');
-    // 首屏关键图片：portrait(about模块首屏可见) + 4张cover(作品模块)
+    // 全部关键资源：logo + 头像 + 作品封面 + 作品详情图
     const images = [
+      'assets/logo-horsehead.jpg',
       'assets/portrait.webp',
-      'assets/cover-ai.webp','assets/cover-live.webp','assets/cover-ds.webp','assets/cover-dash.webp'
+      'assets/cover-ai.webp','assets/cover-live.webp','assets/cover-ds.webp','assets/cover-dash.webp',
+      'assets/detail-ai-1.jpg','assets/detail-ai-2.jpg','assets/detail-ai-3.jpg',
+      'assets/detail-dash-1.jpg','assets/detail-dash-2.jpg',
+      'assets/detail-ds-1.jpg','assets/detail-ds-2.jpg',
+      'assets/detail-live-1.jpg','assets/detail-live-2.jpg','assets/detail-live-3.jpg'
     ];
     let loaded = 0; const total = images.length;
     const startTime = Date.now();
-    const minDisplay = 200; // 最小展示时间，避免闪烁
+    const minDisplay = 500; // 最小展示时间500ms，避免闪烁
     const update = () => { const p=Math.round((loaded/total)*100); fill.style.width=p+'%'; pct.textContent=p+'%'; };
     const finish = () => {
       fill.style.width='100%'; pct.textContent='100%';
@@ -1528,8 +1544,8 @@
       img.src = src;
     }));
     Promise.all(promises).then(finish);
-    // 超时保护：4秒后强制完成，避免网络差时长时间白屏
-    setTimeout(()=>{ if(loaded<total) finish(); }, 4000);
+    // 超时保护：5秒后强制完成，避免网络差时长时间白屏
+    setTimeout(()=>{ if(loaded<total) finish(); }, 5000);
   })();
   // 滚动恢复：移动端刷新后定位到hero，桌面端保持自动恢复
   const isMobile = window.matchMedia('(max-width:760px)').matches;
